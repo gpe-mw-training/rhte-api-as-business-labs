@@ -1,0 +1,11 @@
+kind: OAuthClient
+apiVersion: v1
+metadata:
+  name: "laboauth"
+  labels:
+    app: "sso"
+    container: keycloak
+secret: Ihwo66L8HLdfIG81qcykixe53HmU2qJTlySTpVbKNS7dmxTiGIu2aCXbOT74PEN5
+redirectURIs:
+- https://secure-sso-lab-infra.apps.ce06.openshift.opentlc.com/
+grantMethod: prompt
