@@ -612,17 +612,21 @@ parameters:
 - name: UI_ROUTE
   displayName: User Interface Route Name
   description: The route name to use for the UI.
-  value: apicurio-studio.example.com
+  value: apicurio-studio.${GUID}.rhte.opentlc.com
   required: true
 - name: API_ROUTE
   displayName: API Route Name
   description: The route name to use for the API.
-  value: apicurio-studio-api.example.com
+  value: apicurio-studio-api.${GUID}.rhte.opentlc.com
   required: true
 - name: WS_ROUTE
   displayName: Editing Route Name
   description: The route name to use for editing layer (websocket based).
-  value: apicurio-studio-ws.example.com
+  value: apicurio-studio-ws.${GUID}.rhte.opentlc.com
+  required: true
+- name: AUTH_ROUTE
+  displayName: Authentication Route Name
+  description: The route name to use for Keycloak Authentication.
   required: true
 - name: GENERATED_DB_USER
   displayName: PostgreSQL Connection Username
