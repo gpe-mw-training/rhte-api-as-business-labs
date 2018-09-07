@@ -7,11 +7,22 @@
   <version>1.0.1</version>
   <name>InsuranceQuoting</name>
   <description></description>
+  <packaging>kjar</packaging>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-maven-plugin</artifactId>
+        <version>7.7.0.Final-redhat-8</version>
+        <extensions>true</extensions>
+      </plugin>
+    </plugins>
+  </build>
   <repositories>
     <repository>
-      <id>guvnor-m2-repo</id>
-      <name>Guvnor M2 Repo</name>
-      <url>http://rhdm7-loan-rhdmcentr-rhdm7-loan.192.168.42.179.nip.io/maven2/</url>
+      <id>redhat</id>
+      <name>redhat-ga</name>
+      <url>https://maven.repository.redhat.com/ga/</url>
     </repository>
   </repositories>
 </project>
