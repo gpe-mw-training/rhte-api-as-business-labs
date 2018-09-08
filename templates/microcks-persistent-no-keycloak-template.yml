@@ -27,7 +27,7 @@ parameters:
 - name: MEMORY_LIMIT
   displayName: Memory Limit
   description: Maximum amount of memory the container can use.
-  value: 512Mi
+  value: 1024Mi
 - name: MONGODB_MEMORY_LIMIT
   displayName: MongoDB Memory Limit
   description: Maximum amount of memory the container can use.
@@ -207,7 +207,7 @@ objects:
             protocol: TCP
           env:
           - name: JAVA_OPTS
-            value: "-Xmx300m"
+            value: "-Xmx600m"
           - name: SPRING_PROFILES_ACTIVE
             value: prod
           - name: SPRING_DATA_MONGODB_URI
@@ -228,9 +228,9 @@ objects:
               path: "/api/health"
               port: 8080
               scheme: HTTP
-            initialDelaySeconds: 15
-            timeoutSeconds: 3
-            periodSeconds: 10
+            initialDelaySeconds: 100
+            timeoutSeconds: 100
+            periodSeconds: 100
             successThreshold: 1
             failureThreshold: 3
           readinessProbe:
@@ -307,9 +307,9 @@ objects:
               path: "/health"
               port: 3000
               scheme: HTTP
-            initialDelaySeconds: 4
-            timeoutSeconds: 3
-            periodSeconds: 20
+            initialDelaySeconds: 40
+            timeoutSeconds: 30
+            periodSeconds: 120
             successThreshold: 1
             failureThreshold: 3
           readinessProbe:

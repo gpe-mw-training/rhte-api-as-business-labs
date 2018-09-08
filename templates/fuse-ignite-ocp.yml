@@ -244,7 +244,7 @@ objects:
         updatePeriodSeconds: 1
       resources:
         limits:
-          memory: "256Mi"
+          memory: "512Mi"
         requests:
           memory: "20Mi"
       type: Rolling
@@ -453,7 +453,7 @@ objects:
       type: Recreate
       resources:
         limits:
-          memory: "256Mi"
+          memory: "512Mi"
         requests:
           memory: "20Mi"
     template:
@@ -576,7 +576,7 @@ objects:
     strategy:
       resources:
         limits:
-          memory: "256Mi"
+          memory: "512Mi"
         requests:
           memory: "20Mi"
       type: Recreate
@@ -863,7 +863,7 @@ objects:
     strategy:
       resources:
         limits:
-          memory: "256Mi"
+          memory: "512Mi"
         requests:
           memory: "20Mi"
       type: Recreate

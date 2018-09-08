@@ -328,9 +328,9 @@ objects:
               path: /system/ready
               port: 8080
               scheme: HTTP
-            initialDelaySeconds: 30
-            timeoutSeconds: 5
-            periodSeconds: 10
+            initialDelaySeconds: 100
+            timeoutSeconds: 50
+            periodSeconds: 100
             successThreshold: 1
             failureThreshold: 3
           readinessProbe:
@@ -338,9 +338,9 @@ objects:
               path: /system/ready
               port: 8080
               scheme: HTTP
-            initialDelaySeconds: 15
-            timeoutSeconds: 5
-            periodSeconds: 10
+            initialDelaySeconds: 150
+            timeoutSeconds: 50
+            periodSeconds: 100
             successThreshold: 1
             failureThreshold: 3
           terminationMessagePath: /dev/termination-log
@@ -428,9 +428,9 @@ objects:
               path: /metrics
               port: 8080
               scheme: HTTP
-            initialDelaySeconds: 30
-            timeoutSeconds: 5
-            periodSeconds: 10
+            initialDelaySeconds: 300
+            timeoutSeconds: 50
+            periodSeconds: 100
             successThreshold: 1
             failureThreshold: 3
           readinessProbe:
@@ -438,9 +438,9 @@ objects:
               path: /metrics
               port: 8080
               scheme: HTTP
-            initialDelaySeconds: 15
-            timeoutSeconds: 5
-            periodSeconds: 10
+            initialDelaySeconds: 100
+            timeoutSeconds: 120
+            periodSeconds: 100
             successThreshold: 1
             failureThreshold: 3
           terminationMessagePath: /dev/termination-log
@@ -532,9 +532,9 @@ objects:
               path: /ready
               port: 8080
               scheme: HTTP
-            initialDelaySeconds: 15
-            timeoutSeconds: 5
-            periodSeconds: 10
+            initialDelaySeconds: 60
+            timeoutSeconds: 60
+            periodSeconds: 100
             successThreshold: 1
             failureThreshold: 3
           terminationMessagePath: /dev/termination-log
