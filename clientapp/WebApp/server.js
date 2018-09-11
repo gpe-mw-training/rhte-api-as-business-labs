@@ -39,7 +39,7 @@ https.get(quotesURL, function(res){
     	    // success case, the file was saved
     	    console.log('swagger doc saved!');
     	});
-
+        quotesSpec=body;
     	console.log("GOT: " + quotesSpec);
     	startServer();
     });
