@@ -397,16 +397,6 @@
                                         "name": "sso-x509-jgroups-volume",
                                         "mountPath": "/etc/x509/jgroups",
                                         "readOnly": true
-                                    },
-                                    {
-                                        "name": "microcks-keycloak-config",
-                                        "mountPath": "/opt/jboss/keycloak/standalone/configuration/realm",
-                                        "readOnly": false
-                                    },
-                                    {
-                                        "name": "apicurio-keycloak-config",
-                                        "mountPath": "/opt/jboss/keycloak/standalone/configuration/realm",
-                                        "readOnly": false
                                     }
                                 ],
                                 "livenessProbe": {
@@ -542,18 +532,6 @@
                                 "secret": {
                                     "secretName": "sso-x509-jgroups-secret"
                                 }
-                            },
-                            {
-                                "name": "microcks-keycloak-config",
-							    "configMap": {
-								    "name": "microcks-keycloak-config"
-							    }
-                            },
-                            {
-                                "name": "apicurio-keycloak-config",
-							    "configMap": {
-								    "name": "apicurio-keycloak-config"
-							    }
                             }
                         ]
                     }
