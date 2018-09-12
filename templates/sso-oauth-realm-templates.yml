@@ -36,6 +36,7 @@ parameters:
   generate: expression
   from: "[a-zA-Z0-9]{64}"
   required: true
+objects:  
 - kind: OAuthClient
   apiVersion: v1
   metadata:
