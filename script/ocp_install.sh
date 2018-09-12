@@ -7,13 +7,13 @@ sleep 10s
 
 # Following Env variables should exist:
 
-REGION=f72e
+REGION=40ac
 OCP_DOMAIN=rhte.opentlc.com
 OCP_SUFFIX=apps.$OCP_DOMAIN
 
 # Start and End tenants.
 START_TENANT=1
-END_TENANT=5
+END_TENANT=3
 
  OPENSHIFT_MASTER=https://master.$REGION.$OCP_DOMAIN
 
@@ -82,21 +82,31 @@ oc create -f https://raw.githubusercontent.com/gpe-mw-training/rhte-api-as-busin
 oc adm new-project lab-infra --admin=opentlc-mgr --description="Lab Infrastructure project for SSO, Microcks & Apicurio Studio."
 
 ### Apicurio
+
+oc project lab-infra
+
 oc new-app --template=apicurio-studio --param=AUTH_ROUTE=http://$HOSTNAME_HTTP/auth --param=UI_ROUTE=$APICURIO_UI_ROUTE --param=API_ROUTE=$APICURIO_API_ROUTE --param=WS_ROUTE=$APICURIO_WS_ROUTE --param=API_JVM_MAX=2000m --param=API_MEM_LIMIT=3000Mi --param=WS_JVM_MAX=2000m --param=WS_MEM_LIMIT=2500Mi --param=UI_JVM_MAX=1800m --param=UI_MEM_LIMIT=2500Mi
+
+sleep 60s;
+
 
 ## RH SSO
 oc create serviceaccount sso-service-account
 oc policy add-role-to-user view system:serviceaccount:$(oc project -q):sso-service-account
 oc new-app --template=sso72-x509-mysql-persistent --param=SSO_ADMIN_USERNAME=$SSO_ADMIN_USERNAME --param=SSO_ADMIN_PASSWORD=$SSO_ADMIN_PASSWORD  --param=HOSTNAME_HTTP=$SSO_HOSTNAME_HTTP -param=HOSTNAME_HTTPS=$SSO_HOSTNAME_HTTPS
 
-sleep 30s
+sleep 60s;
 
 ##  RH SSO Realms & OAuthClient
 oc process -f https://raw.githubusercontent.com/gpe-mw-training/rhte-api-as-business-labs/master/templates/sso-oauth-realm-templates.yml--param=OPENSHIFT_MASTER=$OPENSHIFT_MASTER --param=KEYCLOAK_ROUTE_HOSTNAME=$KEYCLOAK_ROUTE_HOSTNAME --param=MICROCKS_ROUTE_HOSTNAME=$MICROCKS_ROUTE_HOSTNAME --param=APICURIO_UI_ROUTE_HOSTNAME=$APICURIO_UI_ROUTE_HOSTNAME --param=OPENSHIFT_OAUTH_CLIENT_NAME=$OPENSHIFT_OAUTH_CLIENT_NAME  | oc create -f -
 
+sleep 30s;
+
 ## Microcks
 
 oc new-app --template=microcks-persistent-no-keycloak --param=APP_ROUTE_HOSTNAME=$MICROCKS_ROUTE_HOSTNAME --param=KEYCLOAK_ROUTE_HOSTNAME=$KEYCLOAK_ROUTE_HOSTNAME
+
+sleep 60s;
 
 ### Create project 'rhdm'
 
@@ -105,6 +115,8 @@ oc adm new-project rhdm --admin=opentlc-mgr --description="Insurance Quote Rules
 oc project rhdm
 
 oc new-app  --name=quoting --template rhdm70-kieserver-basic-s2i  --param=APPLICATION_NAME=$APPLICATION_NAME  --param=KIE_ADMIN_USER=$KIE_ADMIN_USER --param=KIE_ADMIN_PWD=$KIE_ADMIN_PWD --param=KIE_SERVER_USER=$KIE_SERVER_USER --param=KIE_SERVER_PWD=$KIE_SERVER_PWD --param=KIE_SERVER_CONTAINER_DEPLOYMENT=$KIE_SERVER_CONTAINER_DEPLOYMENT --param=SOURCE_REPOSITORY_URL=$SOURCE_REPOSITORY_URL --param=SOURCE_REPOSITORY_REF=$SOURCE_REPOSITORY_REF --param=CONTEXT_DIR=$CONTEXT_DIR
+
+sleep 60s;
 
 ## LOOP FOR TENANTS
 
@@ -135,6 +147,7 @@ oc new-app  --name=quoting --template rhdm70-kieserver-basic-s2i  --param=APPLIC
 	oc policy add-role-to-user view system:serviceaccount:$tenantId-sso:sso-service-account
 	oc new-app --template=sso72-x509-https --param HOSTNAME_HTTP=$tenantId-sso-unsecured.$OCP_SUFFIX --param HOSTNAME_HTTPS=$tenantId-sso.$OC_SUFFIX --param SSO_ADMIN_USERNAME=admin --param SSO_ADMIN_PASSWORD=password --param SSO_SERVICE_USERNAME=admin --param SSO_SERVICE_PASSWORD=password --param SSO_REALM=3scaleRealm
 
+	sleep 60s;
 	# Create project for Syndesis
 
 
@@ -156,6 +169,6 @@ oc new-app  --name=quoting --template rhdm70-kieserver-basic-s2i  --param=APPLIC
 	# Create NodeJS project
 
         oc adm new-project $tenantId-nodejs --admin=$tenantId  --description=$tenantId 
-
+	sleep 5s;
 
     done;	
