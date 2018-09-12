@@ -199,9 +199,9 @@ sleep 60s;
 	bash install-syndesis --route $tenantId-fuse-ignite.$OCP_SUFFIX --open --tag=1.5.4-20180910
 
 
-	# Create NodeJS project
+	# Create NodeJS client project
 
-        oc adm new-project $tenantId-nodejs --admin=$tenantId  --description=$tenantId 
+        oc adm new-project $tenantId-client --admin=$tenantId  --description=$tenantId 
 	sleep 5s;
 
     done;	
