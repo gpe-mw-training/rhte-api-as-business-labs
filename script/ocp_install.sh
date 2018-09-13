@@ -25,7 +25,7 @@ END_TENANT=3
  MICROCKS_ROUTE_HOSTNAME=microcks.$OCP_SUFFIX
  OPENSHIFT_OAUTH_CLIENT_NAME=laboauth
 
- KEYCLOAK_ROUTE_HOSTNAME=http://$SSO_HOSTNAME_HTTP/auth
+ KEYCLOAK_ROUTE_HOSTNAME=$SSO_HOSTNAME_HTTP
 
 # For All SSO installs, default username & password:
  SSO_ADMIN_USERNAME=admin
@@ -133,7 +133,7 @@ sleep 30s;
 
 ## Microcks
 
-oc new-app --template=microcks-persistent-no-keycloak --param=APP_ROUTE_HOSTNAME=$MICROCKS_ROUTE_HOSTNAME --param=KEYCLOAK_ROUTE_HOSTNAME=$KEYCLOAK_ROUTE_HOSTNAME
+oc new-app --template=microcks-persistent-no-keycloak --param=APP_ROUTE_HOSTNAME=$MICROCKS_ROUTE_HOSTNAME --param=KEYCLOAK_ROUTE_HOSTNAME=http://$KEYCLOAK_ROUTE_HOSTNAME/auth
 
 sleep 60s;
 
@@ -203,5 +203,23 @@ sleep 60s;
 
         oc adm new-project $tenantId-client --admin=$tenantId  --description=$tenantId 
 	sleep 5s;
+
+	# Create Gateway Routes
+
+	oc project $tenantId-gw
+	sleep 5s;
+	# Delete the default route created
+	oc delete route --all
+
+	# Provision new routes for Quoting app
+
+	oc create-route edge quote-stage --service="stage-apicast" --hostname=$tenantId-quote-stage.$OCP_SUFFIX  
+	oc create-route edge quote-prod --service="prod-apicast" --hostname=$tenantId-quote-prod.$OCP_SUFFIX  
+
+	# Resume deployment of apicast gateways
+
+	oc resume rollout stage-apicast
+
+	oc resume rollout prod-apicast
 
     done;	
