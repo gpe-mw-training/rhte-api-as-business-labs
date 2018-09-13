@@ -293,7 +293,7 @@ objects:
             protocol: TCP
           env:
              - name: APICURIO_KC_AUTH_URL
-               value: https://${AUTH_ROUTE}/auth
+               value: ${AUTH_ROUTE}
              - name: APICURIO_KC_REALM
                value: ${KC_REALM}
              - name: APICURIO_DB_DRIVER_NAME
