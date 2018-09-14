@@ -10,7 +10,8 @@ app.engine('html', require('ejs').renderFile);
 app.use('/images',express.static(path.join(__dirname , 'images')));
 app.use('/lib',express.static(path.join(__dirname, 'lib')));
 app.use('/files',express.static(path.join(__dirname, 'files')));
-app.use(cors());
+//app.use(cors());
+app.options('*', cors());
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
@@ -24,6 +25,7 @@ var ssoURL = process.env.SSO_URL;
 var quotesSpec=null;
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
 https.get(quotesURL, function(res){
     var body = '';
 
@@ -52,6 +54,7 @@ function startServer(){
 	var envVars = {quotesSecret: quotesSecret, quotesClientId: quotesClientId, ssoURL: ssoURL };
 
 	app.get('/', function (req, res) {
+		req.
 		res.locals.envVars = envVars;
 		res.render('index.html');
 	});
