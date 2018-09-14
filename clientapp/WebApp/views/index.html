@@ -91,7 +91,8 @@ keycloak.init({ onLoad: 'login-required' })
 	$("#getQuoteButton").click(function(){
 		var driver=null;
 		var vehicle=null;
-		
+		SwaggerClient.http.withCredentials = true;
+		set NODE_TLS_REJECT_UNAUTHORIZED=0;
 		$("#quoteResponse").hide();
 		$("#quotePrice").val("");
 		
@@ -110,8 +111,13 @@ keycloak.init({ onLoad: 'login-required' })
 	    		  }
 	    		  }
 	      };
+
+
+
+
+
 	      
-	     SwaggerClient({url:'files/IgniteQuoting.json'}).then(client=> {client.execute({operationId:'quote',parameters:{body:quoteObj},securities:securitiesObj}).then(function(data){$("#quotePrice").html(data.obj.price)})});
+	    SwaggerClient({url:'files/IgniteQuoting.json'}).then(client=> {client.execute({operationId:'quote',parameters:{body:quoteObj},securities:securitiesObj}).then(function(data){$("#quotePrice").html(data.obj.price)})});
 	      
 		$("#quoteResponse").show();
 		
