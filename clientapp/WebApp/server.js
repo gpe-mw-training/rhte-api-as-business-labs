@@ -56,11 +56,12 @@ function startServer(){
 	app.get('/', function (req, res) {
 		req.
 		res.locals.envVars = envVars;
-		res.render('index.html');
 		res.setHeader('Access-Control-Allow-Origin', '*');
 		res.setHeader('Access-Control-Request-Method', '*');
 		res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
 		res.setHeader('Access-Control-Allow-Headers', '*');
+		res.render('index.html');
+
 	});
 
 	app.listen(port, ip);
