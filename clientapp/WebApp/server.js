@@ -10,8 +10,10 @@ app.engine('html', require('ejs').renderFile);
 app.use('/images',express.static(path.join(__dirname , 'images')));
 app.use('/lib',express.static(path.join(__dirname, 'lib')));
 app.use('/files',express.static(path.join(__dirname, 'files')));
+
+cors({credentials: true, origin: true});
 app.use(cors());
-//app.options('*', cors());
+
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
@@ -56,11 +58,6 @@ function startServer(){
 	app.get('/', function (req, res) {
 		req.
 		res.locals.envVars = envVars;
-		res.setHeader('Access-Control-Allow-Origin', '*');
-		res.setHeader('Access-Control-Allow-Credentials', true);
-		res.setHeader('Access-Control-Request-Method', '*');
-		res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST');
-		res.setHeader('Access-Control-Allow-Headers', '*');
 		res.render('index.html');
 
 	});
