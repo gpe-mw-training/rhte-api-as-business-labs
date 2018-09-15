@@ -1253,14 +1253,14 @@ objects:
             {
               "id": "0ca69b5c-7f5b-4f16-b8ba-cdca66eca9e1",
               "clientId": "apicurio-studio",
-              "rootUrl": "APICURIO_UI_ROUTE_HOSTNAME",
-              "baseUrl": "APICURIO_UI_ROUTE_HOSTNAME",
+              "rootUrl": "$APICURIO_UI_ROUTE_HOSTNAME",
+              "baseUrl": "$APICURIO_UI_ROUTE_HOSTNAME",
               "surrogateAuthRequired": false,
               "enabled": true,
               "clientAuthenticatorType": "client-secret",
               "secret": "**********",
               "redirectUris": [
-                  "APICURIO_UI_ROUTE_HOSTNAME/*"
+                  "$APICURIO_UI_ROUTE_HOSTNAME/*"
               ],
               "webOrigins": [
                   "+"

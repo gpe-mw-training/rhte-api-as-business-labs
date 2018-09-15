@@ -7,13 +7,13 @@ sleep 10s
 
 # Following Env variables should exist:
 
-REGION=40ac
+REGION=0b11
 OCP_DOMAIN=rhte.opentlc.com
 OCP_SUFFIX=apps.$REGION.$OCP_DOMAIN
 
 # Start and End tenants.
 START_TENANT=1
-END_TENANT=3
+END_TENANT=10
 
  OPENSHIFT_MASTER=https://master.$REGION.$OCP_DOMAIN
 
@@ -213,13 +213,13 @@ sleep 60s;
 
 	# Provision new routes for Quoting app
 
-	oc create-route edge quote-stage --service="stage-apicast" --hostname=$tenantId-quote-stage.$OCP_SUFFIX  
-	oc create-route edge quote-prod --service="prod-apicast" --hostname=$tenantId-quote-prod.$OCP_SUFFIX  
+	oc create route edge quote-stage --service="stage-apicast" --hostname=$tenantId-quote-stage.$OCP_SUFFIX  
+	oc create route edge quote-prod --service="prod-apicast" --hostname=$tenantId-quote-prod.$OCP_SUFFIX  
 
 	# Resume deployment of apicast gateways
 
-	oc resume rollout stage-apicast
+	oc rollout resume deployment stage-apicast
 
-	oc resume rollout prod-apicast
+	oc rollout resume deployment prod-apicast
 
     done;	
