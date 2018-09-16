@@ -222,4 +222,17 @@ sleep 60s;
 
 	oc rollout resume deployment prod-apicast
 
+	# Fix URLs for 3scale Dev Portal for all users
+
+        oc project 3scale-mt-adm0
+
+        sleep 5s;
+
+        oc delete route $tenantId-3scale-mt-developer
+
+        sleep 5s;
+
+        oc create route edge $tenantId-3scale-mt-developer --service="system-developer" --hostname=$tenantId-3scale-mt.$OCP_SUFFIX
+
+
     done;	
