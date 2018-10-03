@@ -503,7 +503,7 @@ objects:
              - name: APICURIO_UI_HUB_API_URL
                value: http://${API_ROUTE}
              - name: APICURIO_UI_EDITING_URL
-               value: wss://${WS_ROUTE}
+               value: ws://${WS_ROUTE}
              - name: APICURIO_UI_LOGOUT_REDIRECT_URI
                value: /
              - name: APICURIO_MIN_HEAP
